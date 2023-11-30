@@ -42,14 +42,15 @@ Conversely, if the constructed 4-Dimensional Matching instance has a matching $C
 **Solution**
 
 Intersection Inference problem is in NP. A solution X can be verified in polynomial time by computing $|X ∩ A_i|$ for each i and checking if it equals to $c_i$.
-We now show that 3-Dimensional Matching $\leq_{P}$ Intersection Inference. An instance of 3-Dimensional Matching consists of three disjoint sets $X$, $Y$, and $Z$ each containing &n& elements, and a set $T$ triples has one element from each of $X$, $Y$, and $Z$. The question is whether there exists a matching $M \subseteq T$ such that every element of $X \cup Y \cup Z$ occurs in exactly one triple in $M$.  
+We now show that 3-Dimensional Matching $\leq_{P}$ Intersection Inference. An instance of 3-Dimensional Matching consists of three disjoint sets $X$, $Y$, and $Z$ each containing $n$ elements, and a set $T$ triples has one element from each of $X$, $Y$, and $Z$. The question is whether there exists a matching $M \subseteq T$ such that every element of $X \cup Y \cup Z$ occurs in exactly one triple in $M$.  
 We will reduce this to an instance of Intersection Inference as follows:
 
-- Let the base set $U = X \cup Y \cup Z$
-- For each triple t = (x, y, z), create subset $A_t = {x,y,z}$
-- For each $A_t$, set $c_t = 1$
+- Let the base set $U = T$
+- for each element $j \in X \cup Y \cup Z$, we create a set $A_i$ of these triples that contain $j$.
+- $c_j = 1$
 
-Now there exists a solution $X$ to this Intersection Inference instance satisfying $|X ∩ A_t| = c_t = 1$ for all $t \in T$, if and only if there is a matching $M$ in the 3-Dimensional Matching instance. Since $X$, $Y$, and $Z$ have $n$ elements each, the reduction runs in polynomial time.
+We then ask whether there is a set $M \subseteq T$ that hs an intersection of size $1$ with each set $A_j$  
+Such sets are those collections of triples for which each element of $j \in X \cup Y \cup Z$ appears in exactly one.
 
 ### 17.
 
@@ -68,7 +69,7 @@ We claim there is a zero-weight cycle in this graph if and only if the Subset Su
 
 > Suppose that someone gives you a black-box algorithm $\mathcal{A}$ that takes an undirected graph $G = (V, E)$, and a number $k$, and behaves as follows.
 >
-> - If $G$ is not connected, it simply returns “$G$ is not connected.”
+> - If $G$ is not connected, it simply returns $G$ is not connected.
 > - If $G$ is connected and has an independent set of size at least $k$, it returns “yes.”
 > - If $G$ is connected and does not have an independent set of size at least $k$, it returns “no.”
 
