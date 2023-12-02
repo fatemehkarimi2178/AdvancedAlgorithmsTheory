@@ -100,8 +100,8 @@ Now, any set cover $C ⊆ S$ of size $≤ k$ corresponds directly to a $(k, |U|)
 
 ### 25.
 
-> For functions $g_1,\dots, g_l$, we define the function $\max(g_1,\dots, g_l)$ via $$[\max(g_1,\dots, g_l)](x) = \max(g_1(x),\dots, g_l(x)).$$
-> Consider the following problem. You are given $n$ piecewise linear, continuous functions $f_1,\dots, f_n$ defined over the interval $[0, t]$ for some integer t. You are also given an integer $B$. You want to decide: Do there exist $k$ of the functions $f_{i_1} ,\dots, f_{i_k}$ so that $$ \int\_{0}^{t} [\max(f*{i*1} ,\dots, f\*{i_k})](x) dx \ge B? $$
+> For functions $g_1,\dots, g_l$, we define the function $\max(g_1,\dots, g_l)$ via $$[\max(g_1,\dots, g_\ell)](x) = \max(g_1(x),\dots, g_\ell(x)).$$
+> Consider the following problem. You are given $n$ piecewise linear, continuous functions $f_1,\dots, f_n$ defined over the interval $[0, t]$ for some integer t. You are also given an integer $B$. You want to decide: Do there exist $k$ of the functions $f_{i_1} ,\dots, f_{i_k}$ so that $$ \int*{0}^{t} [\max(f*{i*1} ,\dots, f*{i_k})](x) dx \ge B? $$
 > Prove that this problem is NP-complete.
 
 **Solution**
@@ -109,13 +109,15 @@ Now, any set cover $C ⊆ S$ of size $≤ k$ corresponds directly to a $(k, |U|)
 The problem is in NP, since given a subset of functions, we can evaluate the integral and compare to $B$ in polynomial time to verify a solution. We now show that Set-Cover problem which is NP-copmplete, can be reduces to this problem, and then NP-completeness of this problem will be proved. In the Set-Cover problem, we are given a universe $U$ of $n$ elements, a collection $S$ of $m$ subsets of $U$, and an integer $k$. The problem asks if there exists a subcollection $C ⊆ S$ that covers all of $U$, with $|C| ≤ k$.  
 We construct an instance of this problem as follows:
 
-- Create $m$ continuous piecewise linear functions $f_1, \dots ,f_m$ defined over $[0,n]$.
-- For each set $Si ∈ S$, construct function $f_i$ as:
+- Create $m$ continuous piecewise linear functions $g_1, \dots ,g_n$ defined over $[0,n]$.
+- For each element $u_i ∈ U$, construct function $g_i$ as:
 
-  - $f_i(x) = 0$ for $x ∈ [0, |S_i|]$
-  - $f_i(x) = 1$ for $x ∈ (|S_i|, n]$
+  - $g_i(x) = 1$ for $x ∈ [ \frac{i-1}{n}, \frac{i}{n}]$
+  - $g_i(x) = 0$ otherwise
 
-- Set parameter $B = n - k$.
+- for each $S_J ∈ S$, define function $f_j(x)$ as:
+  - $f_j(x) = \sum_{u_i \in S_j} g_i(x)$
+- Set parameter $B = n$.
 
 Therefore, there exists a size $k$ subset with integral $≥ B$ iff there is a size $k$ set cover in the original instance.
 
@@ -160,7 +162,7 @@ Since the reduction runs in polynomial time, this shows that Directed-Disjoint-P
 ### 41.
 
 > Given a directed graph $G$, a cycle cover is a set of node-disjoint cycles so that each node of $G$ belongs to a cycle. The Cycle-Cover Problem asks whether a given directed graph has a cycle cover.  
-> (a) Show that the Cycle-Cover Problem can be solved in polynomial time. (Hint: Use Bipartite Matching.)
+> (a) Show that the Cycle-Cover Problem can be solved in polynomial time. (Hint: Use Bipartite Matching.)  
 > (b) Suppose we require each cycle to have at most three edges. Show that determining whether a graph $G$ has such a cycle cover is NP-complete.
 
 **Solution**
@@ -172,8 +174,9 @@ The Cycle-Cover Problem can be solved in polynomial time using bipartite matchin
 - 1. Construct a bipartite graph $H$ with vertex sets $L = R = V(G)$.
 - 2. Connect nodes $u∈L$ and $v∈R$ with an edge in $H$ if the directed graph $G$ has an edge $(u,v)$.
 - 3. Find a maximum matching $M$ in the bipartite graph $H$.
-- 4. If $M$ matches all nodes in $L$, then $G$ has a cycle cover consisting of the cycles defined by the matched edges. Otherwise there is no cycle cover.  
-     Since bipartite matching can be solved in polynomial time $(O(V(G)E(G)))$, this approach solves the Cycle-Cover Problem in polynomial time.
+- 4. If $M$ matches all nodes in $L$, then $G$ has a cycle cover consisting of the cycles defined by the matched edges. Otherwise there is no cycle cover.
+
+Since bipartite matching can be solved in polynomial time $(O(V(G)E(G)))$, this approach solves the Cycle-Cover Problem in polynomial time.
 
 #### b.
 
