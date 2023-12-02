@@ -29,9 +29,9 @@ $$
 \end{aligned}
 $$
 
-For each $(x, y, z)$ in $C$, create a 4-tuple $(x, y, z, a_i)$ in $C'$ where $a_i$ is the next unused element of $Z'$.  
+For each $(x_i, y_j, z_k)$ in $C$, create a 4-tuple $(x_i, y_j, z_k, a_i)$ in $C'$ where $a_i$ is the ith element of $Z' $(same index as $x$).  
 This reduction runs in polynomial time. We now show it is a correct reduction.
-If the 3-Dimentional Matching has a matching $C$ size of n, then for each $(x, y, z)$ in $C$ we take the corresponding 4-Dimentional Matching tuple $(x, y, z, a_i)$ and these n 4-tuples form a 4-Dimensional Matching in the constructed instance.  
+If the 3-Dimentional Matching has a matching $C$ size of n, then for each $(x_i, y_j, z_k)$ in $C$ we take the corresponding 4-Dimentional Matching tuple $(x_i, y_j, z_k, a_i)$ and these n 4-tuples form a 4-Dimensional Matching in the constructed instance.  
 Conversely, if the constructed 4-Dimensional Matching instance has a matching $C'$ of size n, it must select one 4-tuple for each $z_i$. Each such 4-tuple corresponds directly to a 3-tuple in $C$, and no two can share an element in $X$, $Y$, and $Z$. Hence the corresponding 3-tuples form a 3-Dimensional Matching in the original instance.
 
 ### 16.
