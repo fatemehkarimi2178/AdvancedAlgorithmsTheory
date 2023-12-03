@@ -180,18 +180,17 @@ Since bipartite matching can be solved in polynomial time $(O(V(G)E(G)))$, this 
 
 #### b.
 
-We show the restricted Cycle-Cover Problem with cycle lengths $≤ 3$ is NP-complete via a reduction from 3-SAT:
+We show the restricted Cycle-Cover Problem with cycle lengths $≤ 3$ is NP-complete via a reduction from 3-Dimentional Matching.
+First, the Cycle Cover Problem with cycle lengths $≤ 3$ is in NP, since we can check all cycles, and their length in polynomial time.
+We now show that 3-Dimentional Matching $\leq_{P}$ Cycle Cover Problem with cycle lengths $≤ 3$.  
+The 3-Dimentional-Matching problem is: given three disjoint sets $X, Y, Z$ each containing $n$ elements, and a set of triples $T ⊆ X × Y × Z$, is there a subset $S ⊆ T$ of $n$ triples that covers every elements of $X ∪ Y ∪ Z$ Construct a directed graph $G$ from the 3-Dimentional-Matching instance as follows:
 
-Given a 3-SAT formula with $n$ variables $and$ m clauses, construct a graph $G$:
+- for each $x \in X$, create a vertex $x$
+- for each $y \in Y$, create a vertex $y$
+- for each $z \in Z$, create a vertex $z$
+- for each $(x, y, z) \in T$, add edges $(x, y), (y, z), (z, x)$ to $G$
 
-- For each variable $x$, add vertices $x_T$ and $x_F$
-- For each clause $c_j$, add vertex $c_j$
-- Add edges $(x_T, c_j)$ and $(x_F, c_j)$ if $x$ or $¬x$ appears in $c_j$
-
-The graph $G$ has a cycle-cover with cycles of length $≤ 3$ iff the formula is satisfiable.  
-Cycle $(x_T, c_j, x_F)$ chooses $x=T$, cycle $(x_F, c_j, x_T)$ chooses $x=F$
-All clauses must be covered, so truth assignment satisfies formula
-Since a polynomial reduction exists from 3-SAT, the length-restricted Cycle-Cover Problem is NP-complete.
+It can be observed that &G& has a cycle cover with cycles of at most length 3 if and only if the 3-Dimentional-Matching instance has an exact cover $S$. if S covers $X ∪ Y ∪ Z$, then the corresponding 3-cycles cover $G$. If G has a cycle cover, each cycle is a triplet which corresponds to an element of S that covers $X ∪ Y ∪ Z$.
 
 ## Nondeterministic Algorithms
 
